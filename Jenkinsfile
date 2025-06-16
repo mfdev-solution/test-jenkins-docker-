@@ -8,21 +8,25 @@ pipeline {
 
     stages {
         stage('Build') {
-//             steps {
+            steps {
+            sh 'echo "Build"'
 //                 sh 'mvn clean package'
 //                 archiveArtifacts artifacts: 'target/*.jar', fingerprint: true
-//             }
+            }
+
+
         }
 
         stage('Test') {
-//             steps {
+            steps {
 //                 sh 'mvn test'
-//             }
-            post {
-                always {
-                    junit 'target/surefire-reports/*.xml'
-                }
+                    sh 'echo "Test"'
             }
+//             post {
+//                 always {
+//                     junit 'target/surefire-reports/*.xml'
+//                 }
+//             }
         }
 
         stage('Build Docker Image') {
@@ -30,6 +34,7 @@ pipeline {
                 branch 'main'
             }
             steps {
+                sh 'echo "Building docker image"'
 //                 script {
 //                     docker.build("mon-project-spring:${env.BUILD_ID}")
 //                 }
@@ -37,12 +42,13 @@ pipeline {
         }
 
         stage('Deploy') {
-            when {
-                branch 'main'
-            }
-//             steps {
-//                 sh 'docker-compose up -d'
+//             when {
+//                 branch 'main'
 //             }
+            steps {
+                sh 'echo "deploying"'
+//                 sh 'docker-compose up -d'
+            }
         }
     }
 }
