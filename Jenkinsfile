@@ -46,7 +46,9 @@ pipeline {
 //                 branch 'main'
 //             }
             steps {
-                sh 'echo "deploying"'
+                sh '''echo "deploying"
+                ls -al
+                '''
 //                 sh 'docker-compose up -d'
             }
         }
